@@ -1,76 +1,108 @@
 import java.util.ArrayList;
-
 public class HashSet {
+ 
+    // initiating the array 'buckets' with ArrayList as a datatype
 
-    /*
-     * Annotation, that tells Java compiler that I know about what i am doing
-     * here So turn off the warning message for this specific line of code.
-     */
+    private ArrayList<String>[] buckets;
+    private int size;
 
+    /* 
+    * we are assigning the right side of generic array to the left side 
+    * of array(which can hold only strings), so compiler gets confused
+    * bcz it thinks what happen if someone assign e.g, integer to the string
+    * so system will crash, so we give annotation of @SuppressWarnings which 
+    * means that we know what we are gonna to do.
+    */
     @SuppressWarnings("unchecked")
 
-    // declaring any array of 10 arraylists
-    private static ArrayList<String>[] hashset = new ArrayList[10];
+    // Constructor
 
-    // function that finds the index for the values to be add.
-    private static int hashFunction(String value) {
-        int count = 0;
+    public HashSet(int n)
+    {
+        this.size = n;
+        this.buckets = new ArrayList[size];
 
-        for (int i = 0; i < value.length(); i++) {
-            count += (int) value.charAt(i);
+        for(int i = 0; i < size; i++)
+        {
+            buckets[i] = new ArrayList<String>();
         }
-
-        return count % 10;
     }
 
-    // function that put value in the specified bucket.
-    private static void insertIntoHashTable(String value) {
+    // HashFunction to calculate hash value for each entry
+
+    public int hashFunction(String value)
+    {
+        int sum = 0;
+
+        for(int i = 0; i < value.length(); i++)
+        {
+            sum += (int) value.charAt(i);
+        }
+        return sum % size;
+    }
+
+    // Add Function
+
+    public void add(String value)
+    {
         int index = hashFunction(value);
-        ArrayList<String> bucket = hashset[index];
 
-        if (!bucket.contains(value)) {
-            bucket.add(value);
-        }
+        ArrayList<String> ptr = buckets[index];
+        if(!ptr.contains(value))
+        {
+            ptr.add(value);
+            System.out.println(value +" added.");
+        }        
     }
 
-    private static void display() {
-        for (int i = 0; i < 10; i++) {
-            System.out.println("Bucket " + (i) + " : " + hashset[i]);
-        }
-    }
+    // remove function
 
-    // function that checks either the value is present or not
-    private static void checkLookups(String value) {
+    public boolean remove(String value)
+    {
         int index = hashFunction(value);
-        ArrayList<String> bucket = hashset[index];
-        if (bucket.contains(value)) {
-            System.out.println(value + " exists.");
-        } else {
-            System.out.println(value + " does not exists.");
+
+        ArrayList<String> ptr = buckets[index];
+        if(ptr.contains(value))
+        {
+            ptr.remove(value);
+            return true;
         }
+        return false;
     }
 
+    // Lookup Function
+
+    public boolean lookup(String value)
+    {
+        int index = hashFunction(value);
+
+        ArrayList<String> ptr = buckets[index];
+        if(ptr.contains(value))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // main method
     public static void main(String[] args) {
+        
+        HashSet obj = new HashSet(10);
 
-        // initializing buckets with empty and dynamic size arraylists
-        for (int i = 0; i < hashset.length; i++) {
-            hashset[i] = new ArrayList<String>();
-        }
+        // add function test
 
-        insertIntoHashTable("Jones");
-        insertIntoHashTable("Bob");
-        insertIntoHashTable("Siri");
-        insertIntoHashTable("Pete");
-        insertIntoHashTable("Lisa");
+        obj.add("sara");
+        obj.add("rohan");
+        obj.add("moiz");
+        obj.add("shaheer");
+        obj.add("anaya");
 
-        // here, we are trying to check the collision
-        insertIntoHashTable("Stuart");
+        // lookup and removal test
 
-        System.out.println();
-        display();
-        System.out.println();
+        if(obj.lookup("rohan")) System.out.println("Value present.");
+        else System.out.println("Not present.");
 
-        checkLookups("Lisa");
-        checkLookups("Alex");
+        if(obj.remove("anaya")) System.out.println("value removed.");
+        else System.out.println("value not present.");
     }
 }
