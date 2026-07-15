@@ -23,7 +23,7 @@ public class Longest_Subarray_with_Sum_Divisible_by_K {
             // to handle negative prefixes sum we use this formula to convert number
             // back into the range of 0 - k
             if (remainder < 0) {
-                remainder = (remainder + k) % k;
+                remainder = ((length % k) + k) % k;
             }
 
             if (map.containsKey(remainder)) {
