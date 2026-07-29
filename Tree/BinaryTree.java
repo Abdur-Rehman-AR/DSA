@@ -53,7 +53,7 @@ public class BinaryTree {
         }
     }
 
-    // Level Order Traversal of the nodes as well as DFS concept of traversal
+    // Level Order Traversal of the nodes as well as BFS concept of traversal
     public void levelOrderTraversal(Node root) {
         if (root == null)
             return;
