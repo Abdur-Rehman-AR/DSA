@@ -1,7 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-// Function used to construct the tree
 public class InOrderTraversal {
 
     // Node class representating nodes of tree
