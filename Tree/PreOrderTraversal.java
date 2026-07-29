@@ -1,22 +1,20 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-// Node class representating nodes of tree
-class Node {
-
-    int data;
-    Node left;
-    Node right;
-
-    public Node(int data) {
-        this.data = data;
-        this.left = null;
-        this.right = null;
-    }
-}
-
-// Function used to construct the tree
 public class PreOrderTraversal {
+    // Node class representating nodes of tree
+    static class Node {
+
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
 
     // Root represents the first node of the tree
     Node root = null;

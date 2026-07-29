@@ -1,19 +1,17 @@
 import java.util.*;
-
-// Node class that represents each node of the tree
-class Node {
-    int data;
-    Node left;
-    Node right;
-
-    Node(int data) {
-        this.data = data;
-        left = null;
-        right = null;
-    }
-}
-
 public class BinaryTree {
+    // Node class that represents each node of the tree
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
 
     // Points to the root node of the tree
     Node root;
