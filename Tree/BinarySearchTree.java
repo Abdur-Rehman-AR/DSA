@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class BinarySearchTree {
 
+    // Structure of a node
     class Node {
         int data;
         Node left;
@@ -14,24 +15,25 @@ public class BinarySearchTree {
         }
     }
 
+    // Pointing to the root node of the tree
     Node root = null;
 
-    public Node insertNode(Node ptr, int data) {
-
-        Node node = new Node(data);
+    // Method that inserts the nodes in the tree
+    public Node insertNode(Node root, int data) {
 
         if (root == null) {
-            root = node;
-        } else {
-            if (data < ptr.data) {
-                ptr.left = node;
-            } else {
-                ptr.right = node;
-            }
+            return new Node(data);
         }
-        return node;
+
+        if (data < root.data) {
+            root.left = insertNode(root.left, data);
+        } else if (data > root.data) {
+            root.right = insertNode(root.right, data);
+        }
+        return root;
     }
 
+    // doing an in-order traversal for printing elements
     public void traverseTree(Node root) {
 
         if (root == null)
@@ -53,14 +55,15 @@ public class BinarySearchTree {
         System.out.print("How many nodes do you want to create ? ");
         int n = sc.nextInt();
 
-        Node node = binarySearchTree.root;
-
         for (int i = 0; i < n; i++) {
             System.out.print("Enter number " + (i + 1) + " : ");
             data = sc.nextInt();
-            node = binarySearchTree.insertNode(node, data);
+
+            // Calling function each time user enter data to insert a node in the tree
+            binarySearchTree.root = binarySearchTree.insertNode(binarySearchTree.root, data);
         }
 
+        // Displaying Node's data
         System.out.println();
         binarySearchTree.traverseTree(binarySearchTree.root);
         sc.close();
