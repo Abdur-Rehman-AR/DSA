@@ -18,19 +18,9 @@ public class ArrayBasedBinaryTree {
         tree[0] = data;
     }
 
-    // Get left child index
-    public int leftChild(int index) {
-        return 2 * index + 1;
-    }
-
-    // Get right child index
-    public int rightChild(int index) {
-        return 2 * index + 2;
-    }
-
     // Insert left child
     public void insertLeft(int parentIndex, int data) {
-        int index = leftChild(parentIndex);
+        int index = 2 * parentIndex + 1;
 
         if (index < tree.length) {
             tree[index] = data;
@@ -39,13 +29,14 @@ public class ArrayBasedBinaryTree {
 
     // Insert right child
     public void insertRight(int parentIndex, int data) {
-        int index = rightChild(parentIndex);
+        int index = 2 * parentIndex + 2;
 
         if (index < tree.length) {
             tree[index] = data;
         }
     }
 
+    // this method is working as bfs which processes nodes level by level
     public void bfs() {
 
         for (int i = 0; i < tree.length; i++) {
@@ -71,8 +62,7 @@ public class ArrayBasedBinaryTree {
         tree.insertLeft(2, 6);
         tree.insertRight(2, 7);
 
-        System.out.println("Array: " + Arrays.toString(tree.tree));
-
+        // Printing the tree
         System.out.print("Nodes of Tree: ");
         tree.bfs();
     }
