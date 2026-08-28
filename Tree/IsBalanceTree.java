@@ -2,20 +2,30 @@ public class IsBalanceTree {
 
     public static int isBalance(Node root) {
 
-        // If tree is empty, it means it is balanced.
+        // Empty tree has height 0
         if (root == null)
             return 0;
 
-        int leftHeight = 0;
-        int rightHeight = 0;
+        // Find height of left subtree
+        int leftHeight = isBalance(root.left);
 
-        leftHeight = 1 + isBalance(root.left);
-        rightHeight = 1 + isBalance(root.right);
+        // If left subtree is not balanced
+        if (leftHeight == -1)
+            return -1;
 
-        if (Math.abs(leftHeight - rightHeight) > 1) {
-            return leftHeight - rightHeight;
-        }
-        return 0;
+        // Find height of right subtree
+        int rightHeight = isBalance(root.right);
+
+        // If right subtree is not balanced
+        if (rightHeight == -1)
+            return -1;
+
+        // If height difference is greater than 1
+        if (Math.abs(leftHeight - rightHeight) > 1)
+            return -1;
+
+        // Return height of current subtree
+        return 1 + Math.max(leftHeight, rightHeight);
     }
 
     public static void main(String[] args) {
