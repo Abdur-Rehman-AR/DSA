@@ -38,9 +38,9 @@ public class IsBalanceTree {
 
         // Printing the final result
         System.out.println();
-        if (height <= 1)
-            System.out.println("Tree is Balance.");
+        if (height == -1)
+            System.out.println("Tree is not Balanced.");
         else
-            System.err.println("Tree is not Balance.");
+            System.out.println("Tree is Balanced.");
     }
 }
